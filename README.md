@@ -1,45 +1,41 @@
 # SSM框架配置文件记录
-Spring的有applicationContext.xml
+spring的有applicationContext.xml
 springMVC的有applicationContext-mvc.xml
 Mybatis的有mybatis-config.xml。
-=====================================================================
 或者有些项目拆分为（spring的配置自下而上）
 Mybatis依旧是mybatis-config.xml
----------------------------------------------------------------------
-Spring的applicationContext.xml拆为
+spring的applicationContext.xml拆为
 spring-dao.xml：整合mybatis相关的配置（数据库的属性、数据库连接池、SqlSessionFactory对象，Dao接口包注入容器中）
 spring-service.xml：配置service层，事务
----------------------------------------------------------------------
 springMVC中的applicationContext-mvc.xml
 spring-web.xml：配置springMVC
 
 
 mybatis-config.xml
-=====================================================================
-=<?xml version="1.0" encoding="UTF-8" ?>
-=<!DOCTYPE configuration
-=  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-=  "http://mybatis.org/dtd/mybatis-3-config.dtd">
-=<configuration>
-=	<!-- 配置全局属性 -->
-=	<settings>
-=		<!-- 使用jdbc的getGeneratedKeys获取数据库自增主键值 -->
-=		<setting name="useGeneratedKeys" value="true" />
-=
-=		<!-- 使用列别名替换列名 默认:true -->
-=		<setting name="useColumnLabel" value="true" />
-=
-=		<!-- 开启驼峰命名转换:Table{create_time} -> Entity{createTime} -->
-=		<setting name="mapUnderscoreToCamelCase" value="true" />
-=		<!-- 打印查询语句 -->
-=		<setting name="logImpl" value="STDOUT_LOGGING" />
-=	</settings>
-=</configuration>
-=====================================================================
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 配置全局属性 -->
+	<settings>
+		<!-- 使用jdbc的getGeneratedKeys获取数据库自增主键值 -->
+		<setting name="useGeneratedKeys" value="true" />
+
+		<!-- 使用列别名替换列名 默认:true -->
+		<setting name="useColumnLabel" value="true" />
+
+		<!-- 开启驼峰命名转换:Table{create_time} -> Entity{createTime} -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<!-- 打印查询语句 -->
+		<setting name="logImpl" value="STDOUT_LOGGING" />
+	</settings>
+</configuration>
+
 
 
 applicationContext.xml = spring-dao.xml + spring-service.xml
-=====================================================================
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -82,10 +78,8 @@ applicationContext.xml = spring-dao.xml + spring-service.xml
     <!--开启事务注解扫描-->
     <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
 </beans>
-=====================================================================
 
 applicationContext-mvc.xml  = spring-web.xml
-=====================================================================
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -117,10 +111,8 @@ applicationContext-mvc.xml  = spring-web.xml
         <property name="suffix" value=".jsp"/>
     </bean>
 </beans>
-=====================================================================
 
 配置好SSM的相关配置文件，重点在于配置web.xml,用于加载SSM的配置
-=====================================================================
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -173,4 +165,3 @@ applicationContext-mvc.xml  = spring-web.xml
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 </web-app>
-=====================================================================
